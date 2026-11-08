@@ -1,6 +1,14 @@
 spring:
   application:
     name: auditpilot-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB:auditpilot}
+    username: ${POSTGRES_USER:auditpilot}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
 server:
   port: 8080
 management:
