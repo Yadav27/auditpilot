@@ -1,0 +1,59 @@
+{
+  "realm": "auditpilot",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "bruteForceProtected": true,
+  "roles": {
+    "realm": [
+      { "name": "PLATFORM_ADMIN", "description": "Operates the deployment" },
+      { "name": "TENANT_ADMIN", "description": "Manages one organization" },
+      { "name": "COMPLIANCE_OFFICER", "description": "Reviews findings and generates reports" },
+      { "name": "ENGINEER", "description": "Works on assigned findings" },
+      { "name": "AUDITOR", "description": "Read-only access to evidence and reports" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "auditpilot-dev",
+      "name": "DEV ONLY token client (delete before any real deployment)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": true
+    }
+  ],
+  "users": [
+    {
+      "username": "tina.admin",
+      "email": "tina.admin@example.test",
+      "firstName": "Tina",
+      "lastName": "Admin",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Dev-Only-Pass-1", "temporary": false }],
+      "realmRoles": ["TENANT_ADMIN"]
+    },
+    {
+      "username": "alice.officer",
+      "email": "alice.officer@example.test",
+      "firstName": "Alice",
+      "lastName": "Officer",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Dev-Only-Pass-1", "temporary": false }],
+      "realmRoles": ["COMPLIANCE_OFFICER"]
+    },
+    {
+      "username": "bob.engineer",
+      "email": "bob.engineer@example.test",
+      "firstName": "Bob",
+      "lastName": "Engineer",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Dev-Only-Pass-1", "temporary": false }],
+      "realmRoles": ["ENGINEER"]
+    }
+  ]
+}
