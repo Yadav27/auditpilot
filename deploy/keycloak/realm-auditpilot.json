@@ -15,13 +15,20 @@
   },
   "clients": [
     {
-      "clientId": "auditpilot-dev",
-      "name": "DEV ONLY token client (delete before any real deployment)",
-      "enabled": true,
-      "protocol": "openid-connect",
-      "publicClient": true,
-      "standardFlowEnabled": false,
-      "directAccessGrantsEnabled": true
+    "clientId": "auditpilot-web",
+    "name": "AuditPilot web (Next.js server)",
+    "enabled": true,
+    "protocol": "openid-connect",
+    "publicClient": false,
+    "secret": "dev-only-web-client-secret",
+    "standardFlowEnabled": true,
+    "directAccessGrantsEnabled": false,
+    "redirectUris": ["http://localhost:3000/api/auth/callback/keycloak"],
+    "webOrigins": ["http://localhost:3000"],
+    "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3000/*"
+    }
     }
   ],
   "users": [

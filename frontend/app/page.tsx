@@ -1,4 +1,6 @@
 import { BackendStatus } from "@/components/backend-status";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -8,6 +10,9 @@ export default function Home() {
         Continuous compliance for Canadian software teams.
       </p>
       <BackendStatus />
+      <Link href="/login" className={buttonVariants()}>
+  Sign in
+</Link>
     </main>
   );
 }
