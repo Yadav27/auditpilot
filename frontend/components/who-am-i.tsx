@@ -13,7 +13,7 @@ import {
 
 type Result = { path: string; status: number | "error"; body?: unknown };
 
-const PATHS = ["/api/v1/me", "/api/v1/admin/ping"];
+const PATHS = ["/api/v1/me", "/api/v1/tenant", "/api/v1/admin/ping"];
 
 export function WhoAmI() {
   const [results, setResults] = useState<Result[] | null>(null);

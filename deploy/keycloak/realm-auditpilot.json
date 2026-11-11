@@ -13,6 +13,10 @@
       { "name": "AUDITOR", "description": "Read-only access to evidence and reports" }
     ]
   },
+  "groups": [
+    { "name": "tenant-acme-bank" },
+    { "name": "tenant-birch-insurance" }
+  ],
   "clients": [
     {
     "clientId": "auditpilot-web",
@@ -25,6 +29,20 @@
     "directAccessGrantsEnabled": false,
     "redirectUris": ["http://localhost:3000/api/auth/callback/keycloak"],
     "webOrigins": ["http://localhost:3000"],
+    "protocolMappers": [
+        {
+          "name": "tenant-groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "config": {
+            "claim.name": "groups",
+            "full.path": "false",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "userinfo.token.claim": "false"
+          }
+        }
+    ],
     "attributes": {
         "pkce.code.challenge.method": "S256",
         "post.logout.redirect.uris": "http://localhost:3000/*"
@@ -36,6 +54,7 @@
       "username": "tina.admin",
       "email": "tina.admin@example.test",
       "firstName": "Tina",
+      "groups": ["/tenant-acme-bank"],
       "lastName": "Admin",
       "enabled": true,
       "emailVerified": true,
@@ -46,6 +65,7 @@
       "username": "alice.officer",
       "email": "alice.officer@example.test",
       "firstName": "Alice",
+      "groups": ["/tenant-acme-bank"],
       "lastName": "Officer",
       "enabled": true,
       "emailVerified": true,
@@ -56,11 +76,34 @@
       "username": "bob.engineer",
       "email": "bob.engineer@example.test",
       "firstName": "Bob",
+      "groups": ["/tenant-acme-bank"],
       "lastName": "Engineer",
       "enabled": true,
       "emailVerified": true,
       "credentials": [{ "type": "password", "value": "Dev-Only-Pass-1", "temporary": false }],
       "realmRoles": ["ENGINEER"]
+    },
+        {
+      "username": "carol.officer",
+      "email": "carol.officer@example.test",
+      "firstName": "Carol",
+      "lastName": "Officer",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Dev-Only-Pass-1", "temporary": false }],
+      "realmRoles": ["COMPLIANCE_OFFICER"],
+      "groups": ["/tenant-birch-insurance"]
+    },
+    {
+      "username": "dan.admin",
+      "email": "dan.admin@example.test",
+      "firstName": "Dan",
+      "lastName": "Admin",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{ "type": "password", "value": "Dev-Only-Pass-1", "temporary": false }],
+      "realmRoles": ["TENANT_ADMIN"],
+      "groups": ["/tenant-birch-insurance"]
     }
   ]
 }
